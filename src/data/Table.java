@@ -2,7 +2,7 @@ package data;
 
 public class Table {
 	private String course;
-	public boolean isEmpty;
+	private boolean isEmpty;
 //	public Object waiter; //Synchronization object
 	
 	public Table() {
@@ -12,13 +12,25 @@ public class Table {
 	}
 	
 	public synchronized void serve(String course) {
+		while(!this.isEmpty) {
+			try { wait(); }
+			catch(InterruptedException e) {}
+		}
+		
 		this.course = course;
 		this.isEmpty = false;
+		
+		notifyAll();
 	}
 	
-	public synchronized String  eat() {
+	public synchronized String eat() {
+		while(this.isEmpty) {
+			try { wait(); }
+			catch(InterruptedException e) {}
+		}
+		
 		this.isEmpty = true;
-		this.course = null;
+		notifyAll();
 		return this.course;
 	}
 }
