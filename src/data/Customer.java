@@ -12,11 +12,12 @@ public class Customer implements Runnable {
 	}
 
 	public void run() {
+		
 		if(!table.isEmpty) {
 			System.out.println(this.customerName + " is eating " + table.eat());
 			
 			try { Thread.sleep((long) Math.random() * MAX_WAITER_MILLIS); }
-			catch(InterruptedException e) {}
+			catch(InterruptedException e) {e.printStackTrace();}
 		}
 	}
 }

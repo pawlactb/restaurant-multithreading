@@ -31,11 +31,12 @@ public class Waiter implements Runnable {
 			
 			if(table.isEmpty) {
 				table.serve(this.courses[t][this.currentCourse[t]]);
+				System.out.println(this.waiterName + " serves " + this.customerNames[t] + " " + courses[t][currentCourse[t]]);
 				this.currentCourse[t]++;
 				
 				try { Thread.sleep((long) Math.random() * MAX_WAITER_MILLIS); }
 				catch(InterruptedException e) {}
-			}
+			} else while(!table.isEmpty) {}
 		}
 	}
 

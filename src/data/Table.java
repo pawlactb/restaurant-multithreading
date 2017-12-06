@@ -13,6 +13,7 @@ public class Table {
 	
 	public synchronized void serve(String course) {
 		this.course = course;
+		this.isEmpty = false;
 	}
 	
 	public synchronized String  eat() {
